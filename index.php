@@ -1,4 +1,5 @@
 <?php include 'config.php';
+
 $stmt = $pdo->query("SELECT * FROM users ORDER BY id DESC");
 $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -16,20 +17,30 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
     <h1>User List</h1>
+
     <?php if (isset($_GET['msg'])): ?>
-        <div class="msg success">Record <?php echo $_GET['msg']; ?> successfully!</div>
+        <div class="msg success">
+            Record <?php echo htmlspecialchars($_GET['msg']); ?> successfully!
+        </div>
     <?php endif; ?>
-    <a href="create.php">➕ Add New User</a><br><br>
+
+    <a href="create.php">➕ Add New User</a>
+    <br><br>
+
     <table>
-        <tr><th>ID</th><th>Name</th><th>Email</th><th>Created</th><th>Actions</th></tr>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Created At</th>
+            <th>Actions</th>
+        </tr>
         <?php if (empty($users)): ?>
-            <tr><td colspan="5">No users found. Add your first user!</td></tr>
+        <tr><td colspan="4">No users found. Add your first user!</td></tr>
         <?php else: ?>
             <?php foreach ($users as $u): ?>
             <tr>
                 <td><?= $u['id'] ?></td>
-                <td><?= htmlspecialchars($u['name']) ?></td>
-                <td><?= htmlspecialchars($u['email']) ?></td>
+                <td><?= htmlspecialchars($u['username']) ?></td>
                 <td><?= $u['created_at'] ?></td>
                 <td>
                     <a href="edit.php?id=<?= $u['id'] ?>">Edit</a> |
