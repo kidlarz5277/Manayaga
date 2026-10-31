@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <h1>Edit User</h1>
-    <a href="index1.php">← Back to List</a>
+    <a href="index.php">← Back to List</a>
     <br><br>
 
     <form method="post">
